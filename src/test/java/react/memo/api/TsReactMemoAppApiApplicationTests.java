@@ -1,4 +1,4 @@
-package react.memo.tsreactmemoappapi;
+package react.memo.api;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
