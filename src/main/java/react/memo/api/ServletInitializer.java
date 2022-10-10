@@ -1,4 +1,4 @@
-package react.memo.tsreactmemoappapi;
+package react.memo.api;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;

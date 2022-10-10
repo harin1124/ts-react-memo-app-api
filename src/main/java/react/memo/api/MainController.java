@@ -1,4 +1,4 @@
-package react.memo.tsreactmemoappapi;
+package react.memo.api;
 
 import java.util.HashMap;
 
