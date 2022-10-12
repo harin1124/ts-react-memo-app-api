@@ -1,7 +1,9 @@
 package react.memo.api.dto;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -12,9 +14,11 @@ import lombok.ToString;
 @Getter
 @ToString
 @Entity
+@Table(name="T_USER")
 public class User {
     @Id
     private String userId;
+    @Column
     private String userPassword;
 
     @Builder
