@@ -72,4 +72,4 @@ buildNumber.properties
 *.code-workspace
 
 # properties protected
-src/main/resources/appication.properties
+src/main/resources/application.properties
