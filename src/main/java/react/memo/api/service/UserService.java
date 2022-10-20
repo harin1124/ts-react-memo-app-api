@@ -13,11 +13,25 @@ public class UserService {
     
     public User getUser(User paramObject){
         User findUser = userRepository.findByUserId(paramObject.getUserId());
-        System.out.println("findUser : "+findUser);
-        return null;
+        User returnUser = User.builder().userId(findUser.getUserId()).build();
+        return returnUser;
     }
 
-    public void userJoin(User paramObject){
-        System.out.println("서비스 들어옴");
+    public String userJoin(User paramObject){
+        boolean isUseUserId = isUseUserId(paramObject);
+        if(!isUseUserId){
+            return "error:userId duplication";
+        }
+
+        userRepository.saveAndFlush(paramObject);
+        return "success";
+    }
+
+    public boolean isUseUserId(User paramObject){
+        User findUser = userRepository.findByUserId(paramObject.getUserId());
+        if(findUser == null || "".equals(findUser.getUserId())){
+            return true;
+        }
+        return false;
     }
 }
