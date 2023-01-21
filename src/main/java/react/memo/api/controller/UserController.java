@@ -2,7 +2,12 @@ package react.memo.api.controller;
 
 import java.util.HashMap;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,14 +20,23 @@ import react.memo.api.service.UserService;
 
 @RestController
 public class UserController {
-	@Autowired
-	UserService userService;
+	private final Logger logger = LoggerFactory.getLogger(UserController.class);
 
-	// 로그인
+	@Autowired
+	private UserService userService;
+
+	/**
+	 * 로그인
+	 * @param paramUser 로그인 요청 객체
+	 * @return ResponseEntity
+	 */
 	@PostMapping("/user/login")
-	public HashMap<String, Object> userLogin(@RequestBody User paramObject){
-		HashMap<String, Object> resultMap = new HashMap<String, Object>();
-		return resultMap;
+	@ResponseBody
+	public ResponseEntity<User> userLogin(@RequestBody User paramUser){
+		User userInfo = userService.getUser(paramUser);
+
+		HttpHeaders resHeaders = new HttpHeaders();
+		return new ResponseEntity<User>(userInfo, resHeaders, HttpStatus.OK);
 	}
 
 	// 유저 정보 가져오기
