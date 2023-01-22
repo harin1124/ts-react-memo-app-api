@@ -34,19 +34,7 @@ public class UserController {
 	@ResponseBody
 	public ResponseEntity<User> userLogin(@RequestBody User paramUser){
 		User userInfo = userService.getUser(paramUser);
-
-		HttpHeaders resHeaders = new HttpHeaders();
-		return new ResponseEntity<User>(userInfo, resHeaders, HttpStatus.OK);
-	}
-
-	// 유저 정보 가져오기
-	@GetMapping("/user/{userId}")
-	public HashMap<String, Object> getUser(@PathVariable String userId){
-		HashMap<String, Object> resultMap = new HashMap<String, Object>();
-		User paramUser = User.builder().userId(userId).build();
-		User userInfo = userService.getUser(paramUser);
-		resultMap.put("userId", userInfo.getUserId());
-		return resultMap;
+		return new ResponseEntity<User>(userInfo, new HttpHeaders(), HttpStatus.OK);
 	}
 
 	// 회원가입
