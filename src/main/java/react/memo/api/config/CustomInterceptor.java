@@ -13,7 +13,6 @@ public class CustomInterceptor implements HandlerInterceptor {
 		System.out.println("CustomInterceptor");
 		System.out.printf("METHOD [%s]\r\n", request.getMethod());
 		System.out.printf("URI [%s]\r\n", request.getRequestURI());
-		System.out.println("====================================");
 		return true;
 	}
 }
