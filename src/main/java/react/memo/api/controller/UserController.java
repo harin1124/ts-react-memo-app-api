@@ -37,7 +37,11 @@ public class UserController {
 		return new ResponseEntity<User>(userInfo, new HttpHeaders(), HttpStatus.OK);
 	}
 
-	// 회원가입
+	/**
+	 * 회원가입
+	 * @param paramObject 회원가입을 시도한 유저 객체
+	 * @return
+	 */
 	@PostMapping("/user")
 	@ResponseBody
 	public HashMap<String, Object> userJoin(@RequestBody User paramObject){

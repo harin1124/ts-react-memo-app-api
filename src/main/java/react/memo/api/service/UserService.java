@@ -11,17 +11,18 @@ import react.memo.api.dto.UserRepository;
 
 @Service
 public class UserService {
-	private final Logger logger = LoggerFactory.getLogger(UserService.class);
+    private final Logger logger = LoggerFactory.getLogger(UserService.class);
 
     @Autowired
     private UserRepository userRepository;
     
     public User getUser(User paramObject){
         User findUser = userRepository.findByUserId(paramObject.getUserId());
-		User userInfo = new User();
-		if(findUser != null){
-			userInfo.setUserId(findUser.getUserId());
-		}
+        User userInfo = new User();
+        if(findUser != null){
+            userInfo.setUserId(findUser.getUserId());
+            userInfo.setUserSeq(findUser.getUserSeq());
+        }
         return userInfo;
     }
 

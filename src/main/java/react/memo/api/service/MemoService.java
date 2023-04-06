@@ -18,6 +18,6 @@ public class MemoService {
     private MemoRepository memoRepository;
     
     public ArrayList<Memo> getMemoList(User paramUser){
-        return memoRepository.findByOwnerId(paramUser.getUserId());
+        return memoRepository.findByOwnerSeq(paramUser.getUserSeq());
     }
 }

@@ -1,27 +1,18 @@
 package react.memo.api.dto;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import lombok.*;
 
-@NoArgsConstructor
-@Getter
-@Setter
-@ToString
+@Data
 @Entity
-@Table(name="T_USER")
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class User {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int userSeq;
     private String userId;
-    @Column
     private String userPassword;
-
-    @Builder
-    public User(String userId, String userPassword){
-        this.userId = userId;
-        this.userPassword = userPassword;
-    }
 }

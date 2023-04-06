@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RestController;
 import react.memo.api.dto.Memo;
 import react.memo.api.dto.User;
 import react.memo.api.service.MemoService;
@@ -16,9 +17,9 @@ import react.memo.api.service.UserService;
 
 import java.util.ArrayList;
 
-@Controller
-public class MemoConroller {
-	private final Logger logger = LoggerFactory.getLogger(MemoConroller.class);
+@RestController
+public class MemoController {
+	private final Logger logger = LoggerFactory.getLogger(MemoController.class);
 
 	@Autowired
 	private UserService userService;
@@ -42,6 +43,7 @@ public class MemoConroller {
 
 		// 메모 목록 조회
 		ArrayList<Memo> memoList = memoService.getMemoList(user);
-		return new ResponseEntity<ArrayList<Memo>>(memoList, new HttpHeaders(), HttpStatus.OK);
+		System.out.println(memoList);
+		return ResponseEntity.ok().headers(new HttpHeaders()).body(memoList);
 	}
 }
