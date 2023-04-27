@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import react.memo.api.dto.Memo;
 import react.memo.api.dto.MemoRepository;
-import react.memo.api.dto.User;
+import react.memo.api.dto.Users;
 
 import java.util.ArrayList;
 
@@ -17,7 +17,7 @@ public class MemoService {
     @Autowired
     private MemoRepository memoRepository;
     
-    public ArrayList<Memo> getMemoList(User paramUser){
+    public ArrayList<Memo> getMemoList(Users paramUser){
         return memoRepository.findByOwnerSeq(paramUser.getUserSeq());
     }
 }

@@ -8,11 +8,10 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class AppConfig implements WebMvcConfigurer {
 	@Autowired
-	private CustomInterceptor customIntegerceptor;
+	private CustomInterceptor customInterceptor;
 
 	public void addInterceptors(InterceptorRegistry registry) {
-		registry.addInterceptor(customIntegerceptor)
+		registry.addInterceptor(customInterceptor)
 			.addPathPatterns("/**");
-			//.excludePathPatterns("/user/login");
 	}
 }
