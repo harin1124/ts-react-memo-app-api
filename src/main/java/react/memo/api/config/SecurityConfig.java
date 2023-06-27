@@ -51,7 +51,7 @@ public class SecurityConfig {
       // AuthenticationManager => 이 매니저를 통해 로그인을 진행해야 함
       AuthenticationManager authenticationManager = http.getSharedObject(AuthenticationManager.class);
       http.addFilter(corsConfig.corsFilter())
-          .addFilter(new JwtAuthenticationFilter(authenticationManager))
+          .addFilter(new JwtAuthenticationFilter(authenticationManager, userRepository))
           .addFilter(new JwtAuthorizationFilter(authenticationManager, userRepository));
     }
   }

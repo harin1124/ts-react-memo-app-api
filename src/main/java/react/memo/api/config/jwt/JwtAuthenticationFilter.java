@@ -15,6 +15,8 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import react.memo.api.config.auth.PrincipalDetails;
 import react.memo.api.dto.LoginRequestDto;
+import react.memo.api.dto.Users;
+import react.memo.api.repository.UserRepository;
 
 import java.io.IOException;
 import java.util.Date;
@@ -22,11 +24,12 @@ import java.util.Date;
 @RequiredArgsConstructor
 public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
   private final AuthenticationManager authenticationManager;
+  private final UserRepository userRepository;
 
   // Authentication 객체 만들어서 리턴 => 의존 : AuthenticationManager
   // 인증 요청시에 실행되는 함수 => /login
   @Override
-  public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
+  public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException, NullPointerException {
     System.out.println("[JwtAuthenticationFilter] 진입");
 
     // request에 있는 username 과 password 를 파싱해서 자바 Object 로 받기
@@ -39,6 +42,12 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     }
 
     System.out.println("JwtAuthenticationFilter : "+loginRequestDto);
+
+    // 유저 아이디로 확인
+    Users user = userRepository.findByUserId(loginRequestDto.getUserId());
+    if(user == null){
+      response.setHeader("Login-Fail", "NOT_USER");
+    }
 
     // 유저네임, 패스워드 토큰 생성
     UsernamePasswordAuthenticationToken authenticationToken =
@@ -57,8 +66,8 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     // 결론은 인증 프로바이더에게 알려줄 필요가 없음.
     Authentication authentication = authenticationManager.authenticate(authenticationToken);
 
-    PrincipalDetails principalDetailis = (PrincipalDetails) authentication.getPrincipal();
-    System.out.println("Authentication : "+principalDetailis.getUser().getUserId());
+    PrincipalDetails principalDetails = (PrincipalDetails) authentication.getPrincipal();
+    //System.out.println("Authentication : "+principalDetailis.getUser().getUserId());
     return authentication;
   }
 
@@ -79,5 +88,11 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         .sign(Algorithm.HMAC512(JwtProperties.SECRET));
 
     response.addHeader(JwtProperties.HEADER_STRING, JwtProperties.TOKEN_PREFIX+jwtToken);
+  }
+
+  @Override
+  protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed) throws IOException, ServletException {
+    System.out.println("unsuccessfulAuthentication");
+    super.unsuccessfulAuthentication(request, response, failed);
   }
 }
