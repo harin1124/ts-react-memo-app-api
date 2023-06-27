@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 @RestController
 public class MemoController {
-	private final Logger logger = LoggerFactory.getLogger(MemoController.class);
+	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
 	private MemoService memoService;

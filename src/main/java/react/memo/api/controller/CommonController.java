@@ -1,6 +1,8 @@
 package react.memo.api.controller;
 
 import lombok.AllArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +14,7 @@ import react.memo.api.repository.UserRepository;
 @RestController
 @AllArgsConstructor
 public class CommonController {
+  private final Logger logger = LoggerFactory.getLogger(this.getClass());
   private UserRepository userRepository;
 
   /**

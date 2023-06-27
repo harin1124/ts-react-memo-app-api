@@ -16,7 +16,7 @@ import java.util.HashMap;
 @RestController
 @RequiredArgsConstructor
 public class UserController {
-	private final Logger logger = LoggerFactory.getLogger(UserController.class);
+	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
 	private UserRepository userRepository;

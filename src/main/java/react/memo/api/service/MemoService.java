@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 @Service
 public class MemoService {
-	private final Logger logger = LoggerFactory.getLogger(MemoService.class);
+	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     private MemoRepository memoRepository;
