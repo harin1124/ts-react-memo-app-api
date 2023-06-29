@@ -36,10 +36,6 @@ public class SecurityConfig {
         .access("hasRole('ROLE_USER')")
         .requestMatchers("/memo/**")
         .access("hasRole('ROLE_USER')")
-        //.requestMatchers("/manager/**")
-        //.access("hasRole('ROLE_MANAGER') or hasRole('ROLE_ADMIN')")
-        //.requestMatchers("/admin/**")
-        //.access("hasRole('ROLE_ADMIN')")
         .anyRequest().permitAll()
         .and()
         .build();
