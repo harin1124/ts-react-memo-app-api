@@ -7,6 +7,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import react.memo.api.dto.Memo;
 import react.memo.api.dto.Users;
@@ -27,10 +28,12 @@ public class MemoController {
 	 */
 	@GetMapping("/memo/list/{id}")
 	public ResponseEntity<ArrayList<Memo>> getMemoList(@PathVariable String id){
-		// 메모 목록 조회
-		Users user = new Users();
-		user.setUserId(id);
-		ArrayList<Memo> memoList = memoService.getMemoList(user);
+		ArrayList<Memo> memoList = memoService.getMemoList(id);
 		return ResponseEntity.ok().headers(new HttpHeaders()).body(memoList);
+	}
+
+	@PostMapping("/memo/{id}")
+	public ResponseEntity<String> saveMemo(@PathVariable String id){
+		return ResponseEntity.ok().headers(new HttpHeaders()).body("등록 완료");
 	}
 }
