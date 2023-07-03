@@ -73,3 +73,6 @@ buildNumber.properties
 
 # properties protected
 src/main/resources/application.properties
+
+# idea
+.idea/
