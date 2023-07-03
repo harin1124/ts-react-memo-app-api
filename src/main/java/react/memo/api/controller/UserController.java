@@ -1,70 +1,64 @@
 package react.memo.api.controller;
 
-import java.util.HashMap;
-
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.bind.annotation.*;
+import react.memo.api.config.auth.PrincipalDetails;
+import react.memo.api.dto.Users;
+import react.memo.api.repository.UserRepository;
+import org.springframework.security.core.Authentication;
 
-import react.memo.api.dto.User;
-import react.memo.api.service.UserService;
+import java.util.HashMap;
 
 @RestController
+@RequiredArgsConstructor
 public class UserController {
-	private final Logger logger = LoggerFactory.getLogger(UserController.class);
+	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
-	private UserService userService;
+	private UserRepository userRepository;
+
+	private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
 	/**
 	 * 로그인
-	 * @param paramUser 로그인 요청 객체
+	 * @param authentication 로그인 요청 객체
 	 * @return ResponseEntity
 	 */
-	@PostMapping("/user/login")
-	@ResponseBody
-	public ResponseEntity<User> userLogin(@RequestBody User paramUser){
-		User userInfo = userService.getUser(paramUser);
-		return new ResponseEntity<User>(userInfo, new HttpHeaders(), HttpStatus.OK);
+	@GetMapping("user")
+	public String user(Authentication authentication) {
+		PrincipalDetails principal = (PrincipalDetails) authentication.getPrincipal();
+		System.out.println("principal : " + principal.getUser().getUserSeq());
+		System.out.println("principal : " + principal.getUser().getUserId());
+		System.out.println("principal : " + principal.getUser().getPassword());
+
+		return "<h1>user</h1>";
 	}
 
 	/**
 	 * 회원가입
-	 * @param paramObject 회원가입을 시도한 유저 객체
-	 * @return
+	 * @param user 회원가입을 시도한 유저 객체
+	 * @return 성공 여부
 	 */
-	@PostMapping("/user")
+	@PostMapping("/join")
 	@ResponseBody
-	public HashMap<String, Object> userJoin(@RequestBody User paramObject){
-		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+	public HashMap<String, Object> userJoin(@RequestBody Users user){
+		HashMap<String, Object> resultMap = new HashMap<>();
 
-		// validation - userPassword
-		if(paramObject.getUserPassword() == null || "".equals(paramObject.getUserPassword())){
+		// validation - password
+		if(user.getPassword() == null || "".equals(user.getPassword())){
 			resultMap.put("stat", "error");
 			return resultMap;
 		}
-		
-		// 회원가입 진행
-		String joinResult = userService.userJoin(paramObject);
-		resultMap.put("stat", joinResult);
-		return resultMap;
-	}
 
-	// 아이디 중복 검사
-	@GetMapping("/user/use/{userId}")
-	public HashMap<String, Object> isUseUserId(@PathVariable String userId){
-		HashMap<String, Object> resultMap = new HashMap<String, Object>();
-		User paramUser = User.builder().userId(userId).build();
-		resultMap.put("isUseUserId", userService.isUseUserId(paramUser));
+		// 회원가입 진행
+		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+		user.setUserRole("ROLE_USER");
+		userRepository.save(user);
+		resultMap.put("stat", "success");
 		return resultMap;
 	}
 }

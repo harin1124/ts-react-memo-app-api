@@ -1,10 +1,12 @@
 package react.memo.api.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import lombok.*;
-import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.*;
 import java.util.Date;
 
 @NoArgsConstructor
@@ -13,10 +15,10 @@ import java.util.Date;
 @ToString
 @Entity
 public class Memo {
-    @Id
+  @Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-    private int memoSeq;
-    private int ownerSeq;
+  private int memoSeq;
+  private int ownerSeq;
 	private String title;
 	private String description;
 	@JsonFormat(shape= JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm", timezone="Asia/Seoul")
