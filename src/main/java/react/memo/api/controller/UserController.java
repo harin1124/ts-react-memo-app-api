@@ -16,10 +16,7 @@ import java.util.HashMap;
 @RestController
 @RequiredArgsConstructor
 public class UserController {
-	private final Logger logger = LoggerFactory.getLogger(this.getClass());
-
-	@Autowired
-	private UserRepository userRepository;
+	private final UserRepository userRepository;
 
 	private final BCryptPasswordEncoder bCryptPasswordEncoder;
 

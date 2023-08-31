@@ -1,6 +1,7 @@
 package react.memo.api.controller;
 
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
@@ -12,10 +13,10 @@ import react.memo.api.dto.Users;
 import react.memo.api.repository.UserRepository;
 
 @RestController
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class CommonController {
   private final Logger logger = LoggerFactory.getLogger(this.getClass());
-  private UserRepository userRepository;
+  private final UserRepository userRepository;
 
   /**
    * 아이디 중복 확인
