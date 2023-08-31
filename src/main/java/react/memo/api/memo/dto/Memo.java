@@ -1,4 +1,4 @@
-package react.memo.api.dto;
+package react.memo.api.memo.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.Entity;

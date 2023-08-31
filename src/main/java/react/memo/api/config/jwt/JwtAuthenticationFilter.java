@@ -14,9 +14,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import react.memo.api.config.auth.PrincipalDetails;
-import react.memo.api.dto.LoginRequestDto;
-import react.memo.api.dto.Users;
-import react.memo.api.repository.UserRepository;
+import react.memo.api.user.dto.LoginRequestDto;
+import react.memo.api.user.dto.Users;
+import react.memo.api.user.repository.UserRepository;
 
 import java.io.IOException;
 import java.util.Date;

@@ -5,8 +5,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import react.memo.api.dto.Users;
-import react.memo.api.repository.UserRepository;
+import react.memo.api.user.dto.Users;
+import react.memo.api.user.repository.UserRepository;
 
 @Service
 @RequiredArgsConstructor

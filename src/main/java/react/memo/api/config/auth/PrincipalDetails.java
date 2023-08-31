@@ -2,7 +2,7 @@ package react.memo.api.config.auth;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import react.memo.api.dto.Users;
+import react.memo.api.user.dto.Users;
 
 import java.util.ArrayList;
 import java.util.Collection;

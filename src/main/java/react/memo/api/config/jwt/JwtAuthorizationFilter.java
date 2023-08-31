@@ -14,8 +14,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import react.memo.api.config.auth.PrincipalDetails;
-import react.memo.api.dto.Users;
-import react.memo.api.repository.UserRepository;
+import react.memo.api.user.dto.Users;
+import react.memo.api.user.repository.UserRepository;
 
 /**
  * 인가 클래스

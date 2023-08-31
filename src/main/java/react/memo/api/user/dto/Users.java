@@ -1,4 +1,4 @@
-package react.memo.api.dto;
+package react.memo.api.user.dto;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -13,7 +13,7 @@ import java.util.List;
 @Entity
 public class Users {
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int userSeq;
     private String userId;
     private String password;

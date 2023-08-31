@@ -2,7 +2,7 @@ package react.memo.api;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-import react.memo.api.dto.Users;
+import react.memo.api.user.dto.Users;
 
 @SpringBootTest
 class TsReactMemoAppApiApplicationTests {

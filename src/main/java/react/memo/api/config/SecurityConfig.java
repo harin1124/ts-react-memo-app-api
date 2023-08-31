@@ -11,7 +11,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import react.memo.api.config.jwt.JwtAuthenticationFilter;
 import react.memo.api.config.jwt.JwtAuthorizationFilter;
-import react.memo.api.repository.UserRepository;
+import react.memo.api.user.repository.UserRepository;
 
 @Configuration
 @EnableWebSecurity

@@ -1,13 +1,11 @@
-package react.memo.api.service;
+package react.memo.api.memo.service;
 
 import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-import react.memo.api.dto.Memo;
-import react.memo.api.dto.MemoRepository;
-import react.memo.api.dto.Users;
-import react.memo.api.repository.UserRepository;
+import react.memo.api.memo.dto.Memo;
+import react.memo.api.memo.repository.MemoRepository;
+import react.memo.api.user.dto.Users;
+import react.memo.api.user.repository.UserRepository;
 
 import java.util.ArrayList;
 

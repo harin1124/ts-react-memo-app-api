@@ -1,4 +1,4 @@
-package react.memo.api.dto;
+package react.memo.api.user.dto;
 
 import lombok.Data;
 

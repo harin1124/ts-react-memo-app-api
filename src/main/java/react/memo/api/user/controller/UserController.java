@@ -1,23 +1,21 @@
-package react.memo.api.controller;
+package react.memo.api.user.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import react.memo.api.config.auth.PrincipalDetails;
-import react.memo.api.dto.Users;
-import react.memo.api.repository.UserRepository;
-import org.springframework.security.core.Authentication;
+import react.memo.api.user.dto.Users;
+import react.memo.api.user.repository.UserRepository;
 
 import java.util.HashMap;
 
+@Slf4j
 @RestController
 @RequiredArgsConstructor
 public class UserController {
     private final UserRepository userRepository;
-    
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     
     /**
@@ -28,9 +26,9 @@ public class UserController {
     @GetMapping("user")
     public String user(Authentication authentication) {
         PrincipalDetails principal = (PrincipalDetails) authentication.getPrincipal();
-        System.out.println("principal : " + principal.getUser().getUserSeq());
-        System.out.println("principal : " + principal.getUser().getUserId());
-        System.out.println("principal : " + principal.getUser().getPassword());
+        log.debug("principal : " + principal.getUser().getUserId());
+        log.debug("principal : " + principal.getUser().getPassword());
+        log.debug("principal : " + principal.getUser().getUserSeq());
         
         return "<h1>user</h1>";
     }
