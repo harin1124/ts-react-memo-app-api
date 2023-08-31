@@ -7,11 +7,12 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 public class AppConfig implements WebMvcConfigurer {
-	@Autowired
-	private CustomInterceptor customInterceptor;
-
-	public void addInterceptors(InterceptorRegistry registry) {
-		registry.addInterceptor(customInterceptor)
-			.addPathPatterns("/**");
-	}
+    @Autowired
+    private CustomInterceptor customInterceptor;
+    
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry
+                .addInterceptor(customInterceptor)
+                .addPathPatterns("/**");
+    }
 }

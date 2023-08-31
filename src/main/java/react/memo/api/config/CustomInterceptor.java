@@ -8,9 +8,9 @@ import org.springframework.web.servlet.HandlerInterceptor;
 
 @Configuration
 public class CustomInterceptor implements HandlerInterceptor {
-	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-		System.out.println("====================================");
-		System.out.printf("[%s] %s\r\n", request.getMethod(), request.getRequestURI());
-		return true;
-	}
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        System.out.println("====================================");
+        System.out.printf("[%s] %s\r\n", request.getMethod(), request.getRequestURI());
+        return true;
+    }
 }

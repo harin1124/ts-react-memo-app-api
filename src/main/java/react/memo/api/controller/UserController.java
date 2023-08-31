@@ -16,46 +16,46 @@ import java.util.HashMap;
 @RestController
 @RequiredArgsConstructor
 public class UserController {
-	private final UserRepository userRepository;
-
-	private final BCryptPasswordEncoder bCryptPasswordEncoder;
-
-	/**
-	 * 로그인
-	 * @param authentication 로그인 요청 객체
-	 * @return ResponseEntity
-	 */
-	@GetMapping("user")
-	public String user(Authentication authentication) {
-		PrincipalDetails principal = (PrincipalDetails) authentication.getPrincipal();
-		System.out.println("principal : " + principal.getUser().getUserSeq());
-		System.out.println("principal : " + principal.getUser().getUserId());
-		System.out.println("principal : " + principal.getUser().getPassword());
-
-		return "<h1>user</h1>";
-	}
-
-	/**
-	 * 회원가입
-	 * @param user 회원가입을 시도한 유저 객체
-	 * @return 성공 여부
-	 */
-	@PostMapping("/join")
-	@ResponseBody
-	public HashMap<String, Object> userJoin(@RequestBody Users user){
-		HashMap<String, Object> resultMap = new HashMap<>();
-
-		// validation - password
-		if(user.getPassword() == null || "".equals(user.getPassword())){
-			resultMap.put("stat", "error");
-			return resultMap;
-		}
-
-		// 회원가입 진행
-		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-		user.setUserRole("ROLE_USER");
-		userRepository.save(user);
-		resultMap.put("stat", "success");
-		return resultMap;
-	}
+    private final UserRepository userRepository;
+    
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    
+    /**
+     * 로그인
+     * @param authentication 로그인 요청 객체
+     * @return ResponseEntity
+     */
+    @GetMapping("user")
+    public String user(Authentication authentication) {
+        PrincipalDetails principal = (PrincipalDetails) authentication.getPrincipal();
+        System.out.println("principal : " + principal.getUser().getUserSeq());
+        System.out.println("principal : " + principal.getUser().getUserId());
+        System.out.println("principal : " + principal.getUser().getPassword());
+        
+        return "<h1>user</h1>";
+    }
+    
+    /**
+     * 회원가입
+     * @param user 회원가입을 시도한 유저 객체
+     * @return 성공 여부
+     */
+    @PostMapping("/join")
+    @ResponseBody
+    public HashMap<String, Object> userJoin(@RequestBody Users user){
+        HashMap<String, Object> resultMap = new HashMap<>();
+        
+        // validation - password
+        if(user.getPassword() == null || "".equals(user.getPassword())){
+            resultMap.put("stat", "error");
+            return resultMap;
+        }
+        
+        // 회원가입 진행
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        user.setUserRole("ROLE_USER");
+        userRepository.save(user);
+        resultMap.put("stat", "success");
+        return resultMap;
+    }
 }

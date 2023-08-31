@@ -14,13 +14,12 @@ import java.util.ArrayList;
 @Service
 @RequiredArgsConstructor
 public class MemoService {
-  private final Logger logger = LoggerFactory.getLogger(this.getClass());
-  private final MemoRepository memoRepository;
-  private final UserRepository userRepository;
-
-  public ArrayList<Memo> getMemoList(String userId){
-    // 아이디로 유저 정보 가져오기
-    Users user = userRepository.findByUserId(userId);
-    return memoRepository.findByOwnerSeq(user.getUserSeq());
-  }
+    private final MemoRepository memoRepository;
+    private final UserRepository userRepository;
+    
+    public ArrayList<Memo> getMemoList(String userId){
+        // 아이디로 유저 정보 가져오기
+        Users user = userRepository.findByUserId(userId);
+        return memoRepository.findByOwnerSeq(user.getUserSeq());
+    }
 }

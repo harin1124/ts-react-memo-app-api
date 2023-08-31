@@ -15,14 +15,14 @@ import java.util.Date;
 @ToString
 @Entity
 public class Memo {
-  @Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-  private int memoSeq;
-  private int ownerSeq;
-	private String title;
-	private String description;
-	@JsonFormat(shape= JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm", timezone="Asia/Seoul")
-	private Date regDate;
-	private Date editDate;
-	private int isDel;
+    @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    private int memoSeq;
+    private int ownerSeq;
+    private String title;
+    private String description;
+    @JsonFormat(shape= JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm", timezone="Asia/Seoul")
+    private Date regDate;
+    private Date editDate;
+    private int isDel;
 }
